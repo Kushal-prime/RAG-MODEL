@@ -15,14 +15,13 @@
 
 **Rangkush** transforms standard local script workflows into a beautiful, fully functional web dashboard. Upload your local `.pdf` and `.txt` files directly onto a modern UI, chunk massive text corpus documents into highly optimized vector embeddings, and dynamically converse with a powerful LLM—all without ever modifying configuration files manually.
 
-## 🚀 Key Features
+## 🚀 How the Project Works
 
-*   **Blazing Fast Vector Intelligence:** Powered securely and natively by local `FAISS` clustering and `HuggingFaceEmbeddings` mini-LM computations.
-*   **Intelligent High-Speed Generation:** Uses **Groq's** inference mechanics (optimized via `mixtral-8x7b-32768`) hooked seamlessly through LangChain's retrieval pipelines.
-*   **Dynamic Terminal Transparency:** Captures and securely streams actual native Python backend terminal outputs (standard output traces) right into the web UI interface for uncompromised observability.
-*   **Luxurious Glassmorphic UI:** A beautiful dark-theme minimal UI sculpted entirely dynamically via Vite.
-
----
+This project is designed to make document interrogating incredibly easy by bridging a powerful LangChain backend with an interactive web UI.
+1. **Upload Documents:** Simply drag and drop your PDFs or TXTs. The Python backend reads them seamlessly and splits them into indexable chunks.
+2. **Setup Intelligence:** Hook your Groq LLM API Key directly into the dashboard securely.
+3. **Chat & Retrieve:** Ask intelligent questions about your documents in real-time. The system intelligently fetches the closest chunk of data using FAISS, parses the context rapidly via Groq's Mixtral Engine, and hands you the summary! 
+4. **Transparent Computing:** All native internal Python computing outputs (like loading traces) are streamed into your chat bubble!
 
 ## 🏗️ Technical Architecture Workflow
 
@@ -58,7 +57,11 @@ graph TD;
     classDef db fill:#4c1d95,stroke:#a78bfa,color:#fff
 ```
 
-## 🛠️ Developer Setup & Installation
+---
+
+## 🛠️ How to Run Locally (Developer Setup)
+
+If you'd like to clone this project and run it dynamically on your system, follow these steps:
 
 ### 1. Clone the Source
 ```bash
@@ -88,24 +91,21 @@ cd frontend
 npm install
 ```
 
-## 💻 Runtime Guidelines
-
+### 4. Runtime Execution
 Start the internal components sequentially. Ensure your environment port mappings correctly align to Localhost.
 
 **Terminal 1 (Backend Core API System)**
 ```bash
-# Deploys standard API connections
 python api.py
 ```
 
 **Terminal 2 (Frontend Client)**
 ```bash
-# Start dynamic development server
 cd frontend
 npm run dev
 ```
 
-Browse to your local hosted port environment (Typically `http://localhost:5173/`). Drop your LLM Key securely in the Configuration setup tab, drag your `.pdf` file in, and begin interrogating it natively!
+Browse to your local hosted port environment (Typically `http://localhost:5173/`) and begin talking to your documents!
 
 <br />
 <div align="center">
