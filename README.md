@@ -77,6 +77,58 @@ graph TD;
     classDef db fill:#4c1d95,stroke:#a78bfa,color:#fff
 ```
 
+### 🔄 Runtime Sequence Diagram
+
+For a sequential breakdown of exactly how data packets navigate the system during execution, refer to the mathematical sequence flow below:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User
+    participant Frontend as Dynamic Vite UI
+    participant FastAPI as Backend Router
+    participant Chunking as NLP Splitters
+    participant FAISS as Vector DB
+    participant Groq as Mixtral 8x7b LLM
+    
+    User->>Frontend: Drag & Drop PDF / TXT
+    Frontend->>FastAPI: POST /api/upload (Byte Stream)
+    FastAPI->>Chunking: PyMuPDF / TextLoader
+    Chunking->>Chunking: RecursiveCharacter Split (500/50 logs)
+    Chunking->>FAISS: Compile Embeddings (MiniLM-L6)
+    FAISS-->>FastAPI: Success Status
+    FastAPI-->>Frontend: Streams Python Console Stdout Traces!
+    
+    User->>Frontend: Asks query via Chat + Submits API Key
+    Frontend->>FastAPI: POST /api/query
+    FastAPI->>FAISS: Search Top K=3 Semantic Vectors
+    FAISS-->>FastAPI: Raw Local Text Context
+    FastAPI->>Groq: Prompt + Retrieved Context Strings
+    Groq-->>FastAPI: AI Summarized Output
+    FastAPI-->>Frontend: Display AI Answer & Final Terminal Logs
+```
+
+---
+
+## 📁 Core Project Structure
+
+The repository is modularly segmented. The FastAPI backend orchestrates heavy computation, while the `/frontend` sub-directory handles pure visual rendering.
+
+```text
+RAG-MODEL/
+├── api.py                    # Main FastAPI Backend Engine
+├── frontend/                 # Vite & Vanilla JS UI
+│   ├── index.html            # Main Dashboard DOM Structure
+│   ├── style.css             # Glassmorphic Design System Tokens
+│   └── main.js               # API Fetch & Asynchronous UI Logic
+├── faiss_db/                 # Persistent L2 Vector Index Database
+├── Data/uploaded/            # Real-time secure file ingest layer
+├── load_and_split.py         # Procedural test script for semantic mapping
+├── *.ipynb                   # R&D Jupyter mapping notebooks
+├── requirements-api.txt      # Microservices backend dependencies
+└── requirements.txt          # Deep Learning & NLP pip dependencies
+```
+
 ---
 
 ## 🛠️ How to Run Locally (Developer Setup)
