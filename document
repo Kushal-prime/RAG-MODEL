@@ -1,0 +1,14 @@
+doc = Document(
+    page_content = " Kushal, Manjusha, chinmai, Rudresh are in this class",
+    meta_data = {
+        "source": "sam.txt",
+        "author": "Samyak Dande",
+        "date_created" : "2025"
+    }
+)
+print("Document crated")
+
+print("Filtering search results,\n Tracking document source,\n Provides context, \nDebugging and auditing")
+
+
+type(doc)

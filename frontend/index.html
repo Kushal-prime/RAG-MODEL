@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rangkush | Intelligent RAG Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div class="app-container">
+      
+      <!-- Glass Sidebar -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="logo"></div>
+          <h2>Rangkush</h2>
+          <div class="pulse-indicator"></div>
+        </div>
+
+        <div class="nav-section">
+          <h3>Configuration</h3>
+          <div style="margin-bottom: 1.5rem;">
+            <input type="password" id="apiKeyInput" placeholder="Enter Groq API Key..." class="config-input" />
+            <small style="color: var(--text-secondary); font-size: 0.7rem;">Keys are stored locally in your browser.</small>
+          </div>
+          <h3>Documents</h3>
+          <div id="documentList" class="doc-list">
+             <!-- Uploaded documents will be populated here -->
+          </div>
+          <button id="uploadTriggerBtn" class="primary-btn glow-effect">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            Add Context
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Chat Area -->
+      <main class="chat-container">
+        <header class="chat-header">
+          <div class="model-info">
+            <h1>RAG Intelligence</h1>
+            <p>Groq + Langchain Integration Active</p>
+          </div>
+        </header>
+
+        <div id="chatHistory" class="chat-history">
+          <!-- Welcome Message -->
+          <div class="message system-msg">
+            <div class="avatar">🤖</div>
+            <div class="msg-content">
+              Welcome to the Rangkush RAG Dashboard! Upload a document to build context, then ask me anything.
+            </div>
+          </div>
+        </div>
+
+        <div class="input-area">
+          <form id="chatForm">
+            <input type="text" id="queryInput" placeholder="Ask about your documents..." autocomplete="off" />
+            <button type="submit" class="send-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </form>
+        </div>
+      </main>
+      
+      <!-- Upload Modal Backdrop -->
+      <div id="uploadModal" class="modal-backdrop hidden">
+        <div class="modal">
+          <div class="modal-header">
+            <h2>Add Documents</h2>
+            <button id="closeModalBtn" class="close-btn">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="drop-zone" id="dropZone">
+               <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+               <p>Drag & Drop your .PDF or .TXT files here</p>
+               <span>or</span>
+               <input type="file" id="fileInput" hidden accept=".txt,.pdf" />
+               <button type="button" id="browseFilesBtn" class="secondary-btn">Browse Files</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
